@@ -1,16 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
 
 public class AppOperaciones extends JFrame {
-    // Componentes Ejercicio 1
     private JTextField txtCadena;
     private JTextArea areaResultados1;
     
-    // Componentes Ejercicio 2
     private JTextField txtAlfabeto, txtLimite;
     private JTextArea areaResultados2;
 
@@ -22,7 +19,7 @@ public class AppOperaciones extends JFrame {
 
         JTabbedPane tabs = new JTabbedPane();
 
-        // --- PANEL EJERCICIO 1 ---
+        //PANEL EJERCICIO 1
         JPanel p1 = new JPanel(new BorderLayout(10, 10));
         p1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
@@ -41,7 +38,7 @@ public class AppOperaciones extends JFrame {
         p1.add(new JScrollPane(areaResultados1), BorderLayout.CENTER);
         p1.add(btnCalc1, BorderLayout.SOUTH);
 
-        // --- PANEL EJERCICIO 2 ---
+        //PANEL EJERCICIO 2
         JPanel p2 = new JPanel(new BorderLayout(10, 10));
         p2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
@@ -63,17 +60,12 @@ public class AppOperaciones extends JFrame {
         p2.add(new JScrollPane(areaResultados2), BorderLayout.CENTER);
         p2.add(btnCalc2, BorderLayout.SOUTH);
 
-        // --- BOTÓN EXPORTAR ---
-        JButton btnExportar = new JButton("Exportar Todo a .txt");
-        btnExportar.setBackground(new Color(0, 102, 204));
-        btnExportar.setForeground(Color.WHITE);
-        btnExportar.addActionListener(e -> exportarArchivo());
+
 
         tabs.addTab("Subcadenas/Prefijos/Sufijos", p1);
         tabs.addTab("Cerradura de Kleene y Positiva", p2);
 
         add(tabs, BorderLayout.CENTER);
-        add(btnExportar, BorderLayout.SOUTH);
     }
 
     private void calcularCadenas() {
@@ -126,19 +118,6 @@ public class AppOperaciones extends JFrame {
                                "POSITIVA (Σ+):\n" + resP);
     }
 
-    private void exportarArchivo() {
-        JFileChooser fileChooser = new JFileChooser();
-        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            try (PrintWriter out = new PrintWriter(fileChooser.getSelectedFile() + ".txt")) {
-                out.println("--- REPORTE DE OPERACIONES ---");
-                out.println("\nEJERCICIO 1:\n" + areaResultados1.getText());
-                out.println("\nEJERCICIO 2:\n" + areaResultados2.getText());
-                JOptionPane.showMessageDialog(this, "¡Guardado con éxito!");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al guardar.");
-            }
-        }
-    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new AppOperaciones().setVisible(true));
